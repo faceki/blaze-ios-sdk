@@ -32,7 +32,7 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
     var drivingLicenseFrontImg : UIImage?
     var drivingLicenseBackImg : UIImage?
     
-    var model : DocumentCopyRulesModel?
+    var model : ResultModel?
     var imagesData : [(imageName: String, imageData: Data)]?
     var isCardSelected : Bool?
     var isPassportSelected : Bool?
@@ -67,53 +67,109 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
                 /// ToDO
                 if let selfieImgData = capturedImage.convertImageToJPEGData() {
                     
-                    if (self.model?.data?.allowSingle ?? false) {
+                    if (self.model?.document_optional ?? false) {
                         var docFrontData : Data?
                         var docBackData : Data?
                         
                         if self.isCardSelected ?? false,
-                            let idCardFrontImgData = self.idCardFrontImg?.convertImageToJPEGData(),
-                            let idCardBackImgData = self.idCardBackImg?.convertImageToJPEGData() {
+                           let idCardFrontImgData = self.idCardFrontImg?.scale(newWidth: 640).convertImageToJPEGData(),
+                           let idCardBackImgData = self.idCardBackImg?.scale(newWidth: 640).convertImageToJPEGData() {
                             docFrontData = idCardFrontImgData
                             docBackData = idCardBackImgData
                         } else if self.isPassportSelected ?? false,
-                                  let passportFrontImgData = self.passportFrontImg?.convertImageToJPEGData() {
+                                  let passportFrontImgData = self.passportFrontImg?.scale(newWidth: 640).convertImageToJPEGData() {
                             docFrontData = passportFrontImgData
                             docBackData = passportFrontImgData
                         } else if self.isDrivingLicenseSelected ?? false,
-                                  let drivingLicenseFrontImgData = self.drivingLicenseFrontImg?.convertImageToJPEGData(),
-                                  let drivingLicenseBackImgData = self.drivingLicenseBackImg?.convertImageToJPEGData() {
+                                  let drivingLicenseFrontImgData = self.drivingLicenseFrontImg?.scale(newWidth: 640).convertImageToJPEGData(),
+                                  let drivingLicenseBackImgData = self.drivingLicenseBackImg?.scale(newWidth: 640).convertImageToJPEGData() {
                             docFrontData = drivingLicenseFrontImgData
                             docBackData = drivingLicenseBackImgData
                         }
                         guard let docBackData,
                               let docFrontData else {return}
                         self.imagesData = [
-                            (imageName: "selfie_image", imageData: selfieImgData),
-                            (imageName: "doc_front_image", imageData: docFrontData),
-                            (imageName: "doc_back_image", imageData: docBackData)
+                            (imageName: "selfie", imageData: selfieImgData),
+                            (imageName: "document_1_front", imageData: docFrontData),
+                            (imageName: "document_1_back", imageData: docBackData)
                         ]
                         
                     } else {
                         if let selfieImgData = capturedImage.convertImageToJPEGData() {
-                            self.imagesData = [(imageName: "selfie_image", imageData: selfieImgData)]
+                            self.imagesData = [(imageName: "selfie", imageData: selfieImgData)]
+//                            if self.isTypeAllowed(type: .idCard),
+//                               let idCardFrontImgData = self.idCardFrontImg?.scale(newWidth: 640).convertImageToJPEGData(),
+//                               let idCardBackImgData = self.idCardBackImg?.scale(newWidth: 640).convertImageToJPEGData() {
+//                                self.imagesData?.append(contentsOf: [(imageName: "document_1_front", imageData: idCardFrontImgData),
+//                                                                     (imageName: "document_1_back", imageData: idCardBackImgData)])
+//                            }
+//                            if self.isTypeAllowed(type: .passport),
+//                               let passportFrontImgData = self.passportFrontImg?.scale(newWidth: 640).convertImageToJPEGData() {
+//                                self.imagesData?.append(contentsOf: [(imageName: "document_2_front", imageData: passportFrontImgData),
+//                                                                     (imageName: "document_2_back", imageData: passportFrontImgData)])
+//                            }
+//                            if self.isTypeAllowed(type: .drivingLicense),
+//                               let drivingLicenseFrontImgData = self.drivingLicenseFrontImg?.scale(newWidth: 640).convertImageToJPEGData(),
+//                               let drivingLicenseBackImgData = self.drivingLicenseBackImg?.scale(newWidth: 640).convertImageToJPEGData(){
+//                                self.imagesData?.append(contentsOf: [(imageName: "document_3_front", imageData: drivingLicenseFrontImgData),
+//                                                                     (imageName: "document_3_back", imageData: drivingLicenseBackImgData)])
+//                            }
+                            
+                            var imagesByType: [DocumentType: [(imageName: String, imageData: Data)]] = [:]
+
                             if self.isTypeAllowed(type: .idCard),
-                               let idCardFrontImgData = self.idCardFrontImg?.convertImageToJPEGData(),
-                               let idCardBackImgData = self.idCardBackImg?.convertImageToJPEGData() {
-                                self.imagesData?.append(contentsOf: [(imageName: "id_front_image", imageData: idCardFrontImgData),
-                                                                     (imageName: "id_back_image", imageData: idCardBackImgData)])
+                               let idCardFrontImgData = self.idCardFrontImg?.scale(newWidth: 640).convertImageToJPEGData(),
+                               let idCardBackImgData = self.idCardBackImg?.scale(newWidth: 640).convertImageToJPEGData() {
+                                   imagesByType[.idCard] = [
+                                       (imageName: "idCard_front", imageData: idCardFrontImgData),
+                                       (imageName: "idCard_back", imageData: idCardBackImgData)
+                                   ]
                             }
+
                             if self.isTypeAllowed(type: .passport),
-                               let passportFrontImgData = self.passportFrontImg?.convertImageToJPEGData() {
-                                self.imagesData?.append(contentsOf: [(imageName: "pp_front_image", imageData: passportFrontImgData),
-                                                                     (imageName: "pp_back_image", imageData: passportFrontImgData)])
+                               let passportFrontImgData = self.passportFrontImg?.scale(newWidth: 640).convertImageToJPEGData() {
+                                   imagesByType[.passport] = [
+                                       (imageName: "passport_front", imageData: passportFrontImgData),
+                                       (imageName: "passport_back", imageData: passportFrontImgData)
+                                   ]
                             }
+
                             if self.isTypeAllowed(type: .drivingLicense),
-                               let drivingLicenseFrontImgData = self.drivingLicenseFrontImg?.convertImageToJPEGData(),
-                               let drivingLicenseBackImgData = self.drivingLicenseBackImg?.convertImageToJPEGData(){
-                                self.imagesData?.append(contentsOf: [(imageName: "dl_front_image", imageData: drivingLicenseFrontImgData),
-                                                                     (imageName: "dl_back_image", imageData: drivingLicenseBackImgData)])
+                               let drivingLicenseFrontImgData = self.drivingLicenseFrontImg?.scale(newWidth: 640).convertImageToJPEGData(),
+                               let drivingLicenseBackImgData = self.drivingLicenseBackImg?.scale(newWidth: 640).convertImageToJPEGData() {
+                                   imagesByType[.drivingLicense] = [
+                                       (imageName: "drivingLicense_front", imageData: drivingLicenseFrontImgData),
+                                       (imageName: "drivingLicense_back", imageData: drivingLicenseBackImgData)
+                                   ]
                             }
+                            for (index, (documentType, images)) in imagesByType.enumerated() {
+                                print("Index: \(index)")
+                                print("Document Type: \(documentType)")
+
+                                for (imageName, imageData) in images {
+                                    print("  Image Name: \(imageName)")
+                                                  
+                                    if imageName.contains("back") {
+                                        print("    This image contains 'back'")
+                                        self.imagesData?.append(contentsOf: [
+                                            (imageName: "document_\(index + 1)_back", imageData: imageData)
+                                        ])
+                                    }else{
+                                        
+                                        self.imagesData?.append(contentsOf: [
+                                            (imageName: "document_\(index + 1)_front", imageData: imageData)
+                                        ])    
+                                        
+                                        
+                                        
+                                    }
+                                    // Use imageData as needed (e.g., upload to server, display in UI, etc.)
+                                }
+                            }
+
+               
+                            
+                            
                         }
                     }
                 }
@@ -128,7 +184,7 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func isTypeAllowed(type: DocumentType) -> Bool {
-            return self.model?.data?.allowedKycDocuments?.contains(type.rawValue) == true
+            return self.model?.documents.contains(type.rawValue) == true
         }
     
     private func configureDevice() {

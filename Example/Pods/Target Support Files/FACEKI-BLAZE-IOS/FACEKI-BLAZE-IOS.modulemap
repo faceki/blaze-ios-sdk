@@ -1,0 +1,6 @@
+framework module FACEKI_BLAZE_IOS {
+  umbrella header "FACEKI-BLAZE-IOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

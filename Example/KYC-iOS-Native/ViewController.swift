@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FACEKI_KYC_IOS_V2
+import FACEKI_BLAZE_IOS
 
 class ViewController: UIViewController {
 
@@ -18,11 +18,12 @@ class ViewController: UIViewController {
     
     func onComplete(data:[AnyHashable:Any]){
         print("API Response")
-        print( data["responseCode"])
         print(type(of: data))
 
-        if let dataObject = data["data"] as? [AnyHashable: Any]{
+        if let dataObject = data["result"] as? [AnyHashable: Any]{
             print(dataObject["requestId"]!)
+            print(dataObject["decision"]!)
+
         }
      
     }
@@ -38,8 +39,7 @@ class ViewController: UIViewController {
     @IBAction func captueACtion(_ sender: Any) {
         
         // Example Usage for FACEKI SDK
-        
-        let smManagerVC = Logger.initiateSMSDK(setClientID : "clientid", setClientSecret: "clientSecret", setOnComplete:onComplete,redirectBack: onRedirectBack,selfieImageUrl: nil,cardGuideUrl: nil)
+        let smManagerVC = Logger.initiateSMSDK(setClientID : "clientid", setClientSecret: "clientSecret", workflowId: "workflowID", setOnComplete:onComplete,redirectBack: onRedirectBack,selfieImageUrl: nil,cardGuideUrl: nil)
         navigationController?.pushViewController(smManagerVC, animated: true)
     }
     

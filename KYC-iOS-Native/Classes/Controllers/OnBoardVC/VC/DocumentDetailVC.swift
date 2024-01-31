@@ -42,7 +42,7 @@ class DocumentDetailVC: UIViewController {
     var idCardSelected : Bool?
     var isPassportSelected : Bool?
     var isDrivingLicenseSelected : Bool?
-    var model : DocumentCopyRulesModel?
+    var model : ResultModel?
     
     //MARK: -LifeCycles
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class DocumentDetailVC: UIViewController {
                    overrideUserInterfaceStyle = .light
                }
         
-        if self.model?.data?.allowSingle ?? false {
+        if self.model?.document_optional ?? false {
             
             if self.idCardSelected ?? false {
                 backPicView.isHidden = false
@@ -131,7 +131,7 @@ class DocumentDetailVC: UIViewController {
         
     }
     func isTypeAllowed(type: DocumentType) -> Bool {
-            return self.model?.data?.allowedKycDocuments?.contains(type.rawValue) == true
+            return self.model?.documents.contains(type.rawValue) == true
         }
     
     //MARK: -Actions

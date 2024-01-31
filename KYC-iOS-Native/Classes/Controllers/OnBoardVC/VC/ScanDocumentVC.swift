@@ -25,9 +25,11 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
     @IBOutlet weak var qualityCheckErrorView: UIView!
     @IBOutlet weak var errorDescription : UILabel!
     @IBOutlet weak var errorTitle : UILabel!
+    @IBOutlet weak var idCardFlipView: UIView!
+    
     
     //MARK: -Properties
-    var model : DocumentCopyRulesModel?
+    var model : ResultModel?
     var isCardSelected: Bool?
     var isDrivingLicenseSelected : Bool?
     var isPassportSelected : Bool?
@@ -55,7 +57,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
         
         var scanLabelTitle = ""
         
-        if self.model?.data?.allowSingle ?? false {
+        if self.model?.document_optional ?? false {
             if isCardSelected ?? false {
                 scanLabelTitle = "Scan the Front ID Card side"
             } else if isPassportSelected ?? false {
@@ -102,6 +104,22 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
     //MARK: -Actions
     @IBAction private func didTapBack(_ sender : UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func flipIDCardAnimation(){
+        let idCardFlipAnimationView = LottieAnimationView(name: "idCardFlipAnimation.json", bundle: frameworkImageBundle)
+//        idCardFlipView.isHidden = false
+        if let previewLayer {
+            idCardFlipAnimationView.frame = previewLayer.bounds
+            view.addSubview(idCardFlipAnimationView)
+            idCardFlipAnimationView.loopMode = .repeat(5)
+            idCardFlipAnimationView.animationSpeed = 0.9
+            idCardFlipAnimationView.play()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                idCardFlipAnimationView.stop()
+                idCardFlipAnimationView.removeFromSuperview()
+            }
+        }
     }
     
     @IBAction func capturePhoto(_ sender : UIButton) {
@@ -176,6 +194,8 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                 /// ToDO xxx
                 var imagelooksFine : Bool?
                 let uniqueImageName = UUID().uuidString
+                
+                print(datax?.base64EncodedData())
                 //haziq
                 if let jpegData = datax {
                  
@@ -188,11 +208,12 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
 #warning("Change this line (imagelooksFine ?? true) to this (imagelooksFine ?? false) after Development.")
                             if  (imagelooksFine ?? false) {
                                 
-                                if self.model?.data?.allowSingle ?? false {
+                                if self.model?.document_optional ?? false {
                                     
                                     if isCardSelected ?? false {
                                         if idCardFrontImg == nil {
                                             idCardFrontImg = image
+                                            flipIDCardAnimation()
                                             scanBackIDCard()
                                             self.unhideQualityCheckViewWithAnimation(view : qualityCheckErrorView)
                                             self.hideQualityCheckViewWithAnimation(view : qualityCheckErrorView, deadline: .now() + 6)
@@ -210,6 +231,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                                         
                                         if drivingLicenseFrontImg == nil {
                                             drivingLicenseFrontImg = image
+                                            flipIDCardAnimation()
                                             scanBackDL()
                                             self.unhideQualityCheckViewWithAnimation(view : qualityCheckErrorView)
                                             self.hideQualityCheckViewWithAnimation(view : qualityCheckErrorView, deadline: .now() + 6)
@@ -225,8 +247,10 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                                         if idCardFrontImg == nil {
                                             if imagelooksFine == true {
                                                 idCardFrontImg = image
+                                                flipIDCardAnimation()
                                                 scanBackIDCard()
                                             } else {
+                                                flipIDCardAnimation()
                                                 scanBackIDCard()
                                             }
                                             self.unhideQualityCheckViewWithAnimation(view : qualityCheckErrorView)
@@ -267,6 +291,8 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                                         if drivingLicenseFrontImg == nil {
                                             if imagelooksFine == true {
                                                 drivingLicenseFrontImg = image
+                                                
+                                                flipIDCardAnimation()
                                                 scanBackDL()
                                             } else {
                                                 scanFrontDL()
@@ -340,7 +366,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func isTypeAllowed(type: DocumentType) -> Bool {
-        return self.model?.data?.allowedKycDocuments?.contains(type.rawValue) == true
+        return self.model?.documents.contains(type.rawValue) == true
     }
     
     private func unhideQualityCheckViewWithAnimation(view : UIView) {
@@ -371,7 +397,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
             vc.isPassportSelected = self.isPassportSelected
             vc.isDrivingLicenseSelected = self.isDrivingLicenseSelected
             
-            if self.model?.data?.allowSingle ?? false {
+            if self.model?.document_optional ?? false {
                 
                 if isCardSelected ?? false {
                     vc.frontIdCardImage = self.idCardFrontImg

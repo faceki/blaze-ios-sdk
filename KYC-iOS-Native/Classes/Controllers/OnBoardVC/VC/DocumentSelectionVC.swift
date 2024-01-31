@@ -31,7 +31,7 @@ class DocumentSelectionVC: UIViewController {
     var allowSingle : Bool?
     var allowedKycDocuments = [String]()
     
-    var model : DocumentCopyRulesModel?
+    var model : ResultModel?
     
     //MARK: -lifeCycles
     override func viewDidLoad() {
@@ -43,8 +43,8 @@ class DocumentSelectionVC: UIViewController {
         passportView.isHidden = true
         drivingLicenseView.isHidden = true
         
-        if let allowSingleTrue = model?.data?.allowSingle, allowSingleTrue,
-           let allowedKycDocumentsArray = model?.data?.allowedKycDocuments as? [String] {
+        if let allowSingleTrue = model?.document_optional, allowSingleTrue,
+           let allowedKycDocumentsArray = model?.documents as? [String] {
             
             if allowedKycDocumentsArray.contains("ID Card") {
                 idCardView.isHidden = false

@@ -26,7 +26,7 @@ extension DotLottieFile {
 
       /// Check cache for lottie
       if
-        let dotLottieCache = dotLottieCache,
+        let dotLottieCache,
         let lottie = dotLottieCache.file(forKey: filepath)
       {
         return .success(lottie)
@@ -68,7 +68,7 @@ extension DotLottieFile {
 
       /// Check cache for lottie
       if
-        let dotLottieCache = dotLottieCache,
+        let dotLottieCache,
         let lottie = dotLottieCache.file(forKey: cacheKey)
       {
         return .success(lottie)
@@ -146,7 +146,7 @@ extension DotLottieFile {
     bundle: Bundle = Bundle.main,
     subdirectory: String? = nil,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -186,7 +186,7 @@ extension DotLottieFile {
   public static func loadedFrom(
     filepath: String,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -228,7 +228,7 @@ extension DotLottieFile {
     named name: String,
     bundle: Bundle = Bundle.main,
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -237,7 +237,7 @@ extension DotLottieFile {
 
       /// Check cache for lottie
       if
-        let dotLottieCache = dotLottieCache,
+        let dotLottieCache,
         let lottie = dotLottieCache.file(forKey: cacheKey)
       {
         /// If found, return the lottie.
@@ -295,15 +295,15 @@ extension DotLottieFile {
     dotLottieCache: DotLottieCacheProvider? = DotLottieCache.sharedCache,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
-    if let dotLottieCache = dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
+    if let dotLottieCache, let lottie = dotLottieCache.file(forKey: url.absoluteString) {
       handleResult(.success(lottie))
     } else {
       let task = session.dataTask(with: url) { data, _, error in
         do {
-          if let error = error {
+          if let error {
             throw error
           }
-          guard let data = data else {
+          guard let data else {
             throw DotLottieError.noDataLoaded
           }
           let lottie = try DotLottieFile(data: data, filename: url.deletingPathExtension().lastPathComponent)
@@ -331,7 +331,7 @@ extension DotLottieFile {
   public static func loadedFrom(
     data: Data,
     filename: String,
-    dispatchQueue: DispatchQueue = .global(),
+    dispatchQueue: DispatchQueue = .dotLottie,
     handleResult: @escaping (Result<DotLottieFile, Error>) -> Void)
   {
     dispatchQueue.async {
@@ -358,7 +358,7 @@ extension DotLottieFile {
   public static func loadedFrom(
     data: Data,
     filename: String,
-    dispatchQueue: DispatchQueue = .global())
+    dispatchQueue: DispatchQueue = .dotLottie)
     async throws -> DotLottieFile
   {
     try await withCheckedThrowingContinuation { continuation in
@@ -367,5 +367,12 @@ extension DotLottieFile {
       }
     }
   }
+}
 
+extension DispatchQueue {
+  /// A serial dispatch queue ensures that IO related to loading dot Lottie files don't overlap,
+  /// which can trigger file loading errors due to concurrent unzipping on a single archive.
+  public static let dotLottie = DispatchQueue(
+    label: "com.airbnb.lottie.dot-lottie",
+    qos: .userInitiated)
 }

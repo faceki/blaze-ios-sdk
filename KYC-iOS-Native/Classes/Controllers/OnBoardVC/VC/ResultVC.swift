@@ -17,7 +17,7 @@ class ResultVC: UIViewController {
     @IBOutlet weak var lottieAnimationView : UIView!
     
     var imagesData : [(imageName: String, imageData: Data)]?
-    var model : DocumentCopyRulesModel?
+    var model : ResultModel?
     
     //MARK: -lifeCycles
     override func viewDidLoad() {
@@ -25,11 +25,8 @@ class ResultVC: UIViewController {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
-        if model?.data?.allowSingle ?? false {
-            self.kycVerificationApiCall(imagesData: self.imagesData!, urlString: "https://sdk.faceki.com/kycverify/api/kycverify/kyc-verification")
-        } else {
-            self.kycVerificationApiCall(imagesData: self.imagesData!, urlString: "https://sdk.faceki.com/kycverify/api/kycverify/multi-kyc-verification")
-        }
+        self.kycVerificationApiCall(imagesData: self.imagesData!, urlString: "https://sdk.faceki.com/api/v3/kyc_verification")
+        
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -49,9 +46,9 @@ class ResultVC: UIViewController {
         animationView.play()
     }
     
-    private func presentFinalVC(resposeCode : Int){
+    private func presentFinalVC(decision : String){
         let vc = SuccessFailureVC.successFailureVc()
-        vc.responsCode = resposeCode
+        vc.decision = decision
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -59,12 +56,11 @@ class ResultVC: UIViewController {
         
         Task {
             do {
-                let data = try await Request.shared.uploadMultipleImages(MultiVerificationModel.self, method: .post, imageDatas: self.imagesData!, url: urlString, authToken: Defaults.shared.getToken())
+                let data = try await Request.shared.uploadMultipleImages(KYCVerification.self, method: .post, imageDatas: self.imagesData!, url: urlString, params: ["workflowId": Faceki_workflowId], authToken: Defaults.shared.getToken())
              
-                
-                self.presentFinalVC(resposeCode: data.responseCode ?? 1)
+                self.presentFinalVC(decision: data.result?.decision ?? "")
             } catch {
-                self.presentFinalVC(resposeCode: 1)
+                self.presentFinalVC(decision: "")
             }
         }
         

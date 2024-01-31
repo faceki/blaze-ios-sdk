@@ -1,19 +1,19 @@
 ```markdown
-# FACEKI-KYC-IOS-V2 SDK
+# FACEKI-BLAZE-IOS SDK
 
 ## Overview
 
-The FACEKI-KYC-IOS-V2 SDK is an iOS framework developed by Faceki, providing advanced eKYC (Electronic Know Your Customer) and Facial Recognition capabilities for iOS applications. This SDK enables seamless identity verification using document and selfie verification.
+The FACEKI-BLAZE-IOS SDK is an iOS framework developed by Faceki, providing advanced eKYC (Electronic Know Your Customer) and Facial Recognition capabilities for iOS applications. This SDK enables seamless identity verification using document and selfie verification.
 
 ## Installation
 
 ### CocoaPods
 
-To integrate FACEKI-KYC-IOS-V2 SDK into your Xcode project using CocoaPods, add the following lines to your `Podfile`:
+To integrate FACEKI-BLAZE-IOS SDK into your Xcode project using CocoaPods, add the following lines to your `Podfile`:
 
 ```ruby
 target 'YourProjectName' do
-  pod 'FACEKI-KYC-IOS-V2', '~> 2.0.0'
+  pod 'FACEKI-BLAZE-IOS', '~> 3.0.0'
 end
 ```
 
@@ -25,7 +25,7 @@ $ pod install
 
 ### Manual Installation
 
-You can also manually integrate the FACEKI-KYC-IOS-V2 SDK into your project. Download the SDK from [GitHub releases](https://github.com/faceki/faceki-ios-sdk-revamp/releases) and follow the instructions provided in the documentation.
+You can also manually integrate the FACEKI-BLAZE-IOS SDK into your project. Download the SDK from [GitHub releases](https://github.com/faceki/blaze-ios-sdk/releases) and follow the instructions provided in the documentation.
 
 #### Permission
 
@@ -45,18 +45,20 @@ Add the following usage descriptions to your Info.plist
 Implement the following callbacks to handle the SDK responses:
 
 
-Callback that will recieve the response back from the API for data level information https://kycdocv2.faceki.com/api-integration/verification-apis
+Callback that will recieve the response back from the API for data level information https://docs.faceki.com
 
 ```swift
 
-func onComplete(data: [AnyHashable: Any]) {
+func onComplete(data:[AnyHashable:Any]){
     print("API Response")
-    print(data["responseCode"])
     print(type(of: data))
 
-    if let dataObject = data["data"] as? [AnyHashable: Any] {
+    if let dataObject = data["result"] as? [AnyHashable: Any]{
         print(dataObject["requestId"]!)
+        print(dataObject["decision"]!)
+
     }
+    
 }
 
 // Redirect After Result Screen
@@ -72,7 +74,7 @@ func onRedirectBack() {
 ### Initialization
 
 ```swift
-import FACEKI_KYC_IOS_V2
+import FACEKI_BLAZE_IOS
 
 class YourViewController: UIViewController {
 
@@ -80,6 +82,7 @@ class YourViewController: UIViewController {
         let smManagerVC = Logger.initiateSMSDK(
             setClientID: "yourClientId",
             setClientSecret: "yourClientSecret",
+            workflowId:"yourworkflowID",
             setOnComplete: onComplete,
             redirectBack: onRedirectBack,
             selfieImageUrl: nil,
@@ -102,4 +105,4 @@ class YourViewController: UIViewController {
 
 ## License
 
-FACEKI-KYC-IOS-V2 SDK is released under the [MIT License](LICENSE)
+FACEKI-BLAZE-IOS SDK is released under the [MIT License](LICENSE)

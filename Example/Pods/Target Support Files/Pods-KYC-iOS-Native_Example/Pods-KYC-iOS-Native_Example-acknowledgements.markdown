@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## FACEKI-KYC-IOS-V2
+## FACEKI-BLAZE-IOS
 
 Copyright (c) 2022 faceki <info@faceki.com>
 

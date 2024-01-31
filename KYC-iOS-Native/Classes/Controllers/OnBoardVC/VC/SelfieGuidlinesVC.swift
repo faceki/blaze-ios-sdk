@@ -28,7 +28,7 @@ class SelfieGuidlinesVC: UIViewController {
     var idCardImages : [UIImage] = []
     var passportImages : [UIImage] = []
     
-    var model : DocumentCopyRulesModel?
+    var model : ResultModel?
     var isCardSelected : Bool?
     var isPassportSelected : Bool?
     var isDrivingLicenseSelected : Bool?
@@ -52,7 +52,7 @@ class SelfieGuidlinesVC: UIViewController {
         vc.isDrivingLicenseSelected = self.isDrivingLicenseSelected
         vc.isPassportSelected = self.isPassportSelected
         
-        if self.model?.data?.allowSingle ?? false {
+        if self.model?.document_optional ?? false {
             
             if isCardSelected ?? false {
                 vc.idCardFrontImg = self.frontIdCardImage

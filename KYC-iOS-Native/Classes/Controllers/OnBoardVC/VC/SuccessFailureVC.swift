@@ -19,7 +19,7 @@ class SuccessFailureVC: UIViewController {
     @IBOutlet weak var statusSubtitleLabel : UILabel!
     
     //MARK: -Properties
-    var responsCode : Int?
+    var decision : String?
     
     //MARK: -LifeCycles
     override func viewDidLoad() {
@@ -27,9 +27,9 @@ class SuccessFailureVC: UIViewController {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
-        if let responsCode {
+        if let decision {
             self.loadAnimation()
-            if responsCode == 0 {
+            if decision == "ACCEPTED" {
                 statusTitleLabel.text = "Successful"
                 statusSubtitleLabel.text = "Your identity verification successful"
             } else {
@@ -45,7 +45,7 @@ class SuccessFailureVC: UIViewController {
     
     //MARK: -Methods
     private func loadAnimation(){
-        let animationView = LottieAnimationView(name: self.responsCode == 0 ? "lottieSuccess.json" : "lottieFail.json", bundle: frameworkImageBundle)
+        let animationView = LottieAnimationView(name: self.decision == "ACCEPTED" ? "lottieSuccess.json" : "lottieFail.json", bundle: frameworkImageBundle)
         animationView.frame = lottieAnimationView.bounds
         lottieAnimationView.addSubview(animationView)
         animationView.loopMode = .loop

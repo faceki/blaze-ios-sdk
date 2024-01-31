@@ -3,7 +3,7 @@ use_frameworks!
 platform :ios, '13.0'
 
 target 'KYC-iOS-Native_Example' do
-  pod 'FACEKI-KYC-IOS-V2',  :git => 'https://github.com/faceki/faceki-ios-sdk-revamp.git'
+  pod 'FACEKI-BLAZE-IOS',  :path => '../'
 
   target 'KYC-iOS-Native_Tests' do
     inherit! :search_paths

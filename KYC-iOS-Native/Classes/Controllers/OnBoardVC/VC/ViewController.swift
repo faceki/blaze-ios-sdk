@@ -56,18 +56,18 @@ class ViewController: UIViewController {
     private func getDocumentRulesApiCall(){
         Task {
             do{
-                var result = try await viewModel.documentCopyRulesApiCall()
+                var result = try await viewModel.workflowRulesApiCall()
 //                result.data?.allowSingle = true
 //                result.data?.allowedKycDocuments = [DocumentType.idCard.rawValue,DocumentType.passport.rawValue,DocumentType.drivingLicense.rawValue]
                 self.stopActivityIndicator()
-                if let allowSingle = result.data?.allowSingle {
+                if let allowSingle = result.result?.document_optional {
                     if allowSingle {
                         let vc = DocumentSelectionVC.documentSelectionVc()
-                        vc.model = result
+                        vc.model = result.result
                         self.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         let vc = DocumentDetailVC.documentDetailVc()
-                        vc.model = result
+                        vc.model = result.result
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }

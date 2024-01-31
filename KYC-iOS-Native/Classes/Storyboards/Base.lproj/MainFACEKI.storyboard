@@ -14,7 +14,7 @@
         <!--On Boarding View Controller-->
         <scene sceneID="JtJ-BZ-KQ3">
             <objects>
-                <viewController storyboardIdentifier="OnBoardingViewController" id="30o-5u-8wg" customClass="OnBoardingViewController" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnBoardingViewController" id="30o-5u-8wg" customClass="OnBoardingViewController" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qwb-MS-EhR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
         <!--Success FailureVC-->
         <scene sceneID="MR1-EE-9OK">
             <objects>
-                <viewController storyboardIdentifier="SuccessFailureVC" id="SGJ-wI-k2n" customClass="SuccessFailureVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SuccessFailureVC" id="SGJ-wI-k2n" customClass="SuccessFailureVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ERg-wz-ZQ4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,7 +131,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,7 +229,7 @@
         <!--Document SelectionVC-->
         <scene sceneID="ZMM-kG-lDW">
             <objects>
-                <viewController storyboardIdentifier="DocumentSelectionVC" id="fJc-wW-Ngl" customClass="DocumentSelectionVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DocumentSelectionVC" id="fJc-wW-Ngl" customClass="DocumentSelectionVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DdJ-AF-lOf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -493,7 +493,7 @@
         <!--Document DetailVC-->
         <scene sceneID="HpH-rO-fsG">
             <objects>
-                <viewController storyboardIdentifier="DocumentDetailVC" id="WsI-hg-UIO" customClass="DocumentDetailVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DocumentDetailVC" id="WsI-hg-UIO" customClass="DocumentDetailVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7dD-Ly-2uG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -852,7 +852,7 @@
         <!--GuidelinesVC-->
         <scene sceneID="a5u-5K-tbV">
             <objects>
-                <viewController storyboardIdentifier="IDGuidelinesVC" id="dzf-hx-N5J" customClass="IDGuidelinesVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IDGuidelinesVC" id="dzf-hx-N5J" customClass="IDGuidelinesVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0P8-Wp-Mdh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -937,7 +937,7 @@
         <!--Selfie GuidlinesVC-->
         <scene sceneID="0oq-QV-Klp">
             <objects>
-                <viewController storyboardIdentifier="SelfieGuidlinesVC" id="bjA-z3-Vyn" customClass="SelfieGuidlinesVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelfieGuidlinesVC" id="bjA-z3-Vyn" customClass="SelfieGuidlinesVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yXh-Ki-KLL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1046,7 +1046,7 @@
         <!--ResultVC-->
         <scene sceneID="I8z-p1-Fhv">
             <objects>
-                <viewController storyboardIdentifier="ResultVC" id="gKZ-K9-Bfs" customClass="ResultVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultVC" id="gKZ-K9-Bfs" customClass="ResultVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YPe-R0-vLc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1100,7 +1100,7 @@
         <!--Scan DocumentVC-->
         <scene sceneID="CaA-b7-GC1">
             <objects>
-                <viewController storyboardIdentifier="ScanDocumentVC" id="sDQ-mS-AIS" customClass="ScanDocumentVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanDocumentVC" id="sDQ-mS-AIS" customClass="ScanDocumentVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ABE-5o-ozK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1254,6 +1254,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szK-T1-PP7">
+                                <rect key="frame" x="0.0" y="218" width="414" height="300"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b3i-yv-nN9">
                                 <rect key="frame" x="0.0" y="218" width="414" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1279,22 +1282,28 @@
                         <constraints>
                             <constraint firstItem="TMf-nJ-mDz" firstAttribute="leading" secondItem="Mn2-VH-BRg" secondAttribute="leading" id="38p-zm-bHo"/>
                             <constraint firstItem="Mn2-VH-BRg" firstAttribute="trailing" secondItem="TMf-nJ-mDz" secondAttribute="trailing" id="7me-1R-qir"/>
+                            <constraint firstItem="szK-T1-PP7" firstAttribute="leading" secondItem="b3i-yv-nN9" secondAttribute="leading" id="8BW-05-ygV"/>
                             <constraint firstItem="TMf-nJ-mDz" firstAttribute="top" secondItem="W4e-p2-cxb" secondAttribute="bottom" id="Dm2-Hb-7Su"/>
                             <constraint firstItem="IxH-IT-pfb" firstAttribute="trailing" secondItem="Mn2-VH-BRg" secondAttribute="trailing" id="GUq-bV-Qip"/>
                             <constraint firstItem="NPX-Le-ZMn" firstAttribute="height" secondItem="ABE-5o-ozK" secondAttribute="height" multiplier="0.075" id="LUN-UB-TlP"/>
                             <constraint firstAttribute="bottom" secondItem="IxH-IT-pfb" secondAttribute="bottom" id="Na7-85-PRq"/>
                             <constraint firstItem="TMf-nJ-mDz" firstAttribute="top" secondItem="Mn2-VH-BRg" secondAttribute="top" id="Nhj-gn-Wf7"/>
                             <constraint firstItem="NPX-Le-ZMn" firstAttribute="width" secondItem="ABE-5o-ozK" secondAttribute="width" multiplier="0.75" id="Nz3-AE-bSZ"/>
+                            <constraint firstItem="szK-T1-PP7" firstAttribute="trailing" secondItem="b3i-yv-nN9" secondAttribute="trailing" id="StD-ES-Ju7"/>
                             <constraint firstItem="b3i-yv-nN9" firstAttribute="centerX" secondItem="ABE-5o-ozK" secondAttribute="centerX" id="Tin-6S-Gzd"/>
                             <constraint firstItem="b3i-yv-nN9" firstAttribute="leading" secondItem="Mn2-VH-BRg" secondAttribute="leading" id="Wgw-lw-0KA"/>
                             <constraint firstItem="W4e-p2-cxb" firstAttribute="leading" secondItem="ABE-5o-ozK" secondAttribute="leading" id="Y8b-JX-GpZ"/>
                             <constraint firstItem="IxH-IT-pfb" firstAttribute="top" secondItem="b3i-yv-nN9" secondAttribute="bottom" id="bCc-1c-CKk"/>
+                            <constraint firstItem="szK-T1-PP7" firstAttribute="centerY" secondItem="b3i-yv-nN9" secondAttribute="centerY" id="bRA-GG-hUX"/>
+                            <constraint firstItem="szK-T1-PP7" firstAttribute="centerX" secondItem="b3i-yv-nN9" secondAttribute="centerX" id="bZb-r5-8ef"/>
                             <constraint firstItem="b3i-yv-nN9" firstAttribute="centerY" secondItem="ABE-5o-ozK" secondAttribute="centerY" id="cob-5J-I0J"/>
                             <constraint firstItem="Mn2-VH-BRg" firstAttribute="trailing" secondItem="b3i-yv-nN9" secondAttribute="trailing" id="ee8-PC-Lqp"/>
+                            <constraint firstItem="szK-T1-PP7" firstAttribute="top" secondItem="b3i-yv-nN9" secondAttribute="top" id="gMF-cQ-ciZ"/>
                             <constraint firstItem="b3i-yv-nN9" firstAttribute="top" secondItem="TMf-nJ-mDz" secondAttribute="bottom" id="gU9-4d-OLk"/>
                             <constraint firstItem="IxH-IT-pfb" firstAttribute="leading" secondItem="Mn2-VH-BRg" secondAttribute="leading" id="sHA-N4-Ge0"/>
                             <constraint firstItem="W4e-p2-cxb" firstAttribute="top" secondItem="ABE-5o-ozK" secondAttribute="top" id="vj4-7c-NZ4"/>
                             <constraint firstAttribute="trailing" secondItem="W4e-p2-cxb" secondAttribute="trailing" id="wku-55-6mk"/>
+                            <constraint firstItem="szK-T1-PP7" firstAttribute="bottom" secondItem="b3i-yv-nN9" secondAttribute="bottom" id="ypg-JQ-t8v"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1302,6 +1311,7 @@
                         <outlet property="captureView" destination="b3i-yv-nN9" id="Meo-wF-KC9"/>
                         <outlet property="errorDescription" destination="jcx-FP-Euh" id="Dt1-Ti-wHb"/>
                         <outlet property="errorTitle" destination="n8f-iY-c3A" id="cF4-ly-y3N"/>
+                        <outlet property="idCardFlipView" destination="szK-T1-PP7" id="zNW-Gg-HXC"/>
                         <outlet property="overLayView" destination="TMf-nJ-mDz" id="GmR-a9-JhP"/>
                         <outlet property="overLayView2" destination="IxH-IT-pfb" id="5Bv-Ah-8aE"/>
                         <outlet property="qualityCheckErrorView" destination="NPX-Le-ZMn" id="tNp-Hg-cZp"/>
@@ -1311,12 +1321,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p59-eZ-HK2" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3803" y="12"/>
+            <point key="canvasLocation" x="3802.898550724638" y="11.413043478260871"/>
         </scene>
         <!--SelfieVC-->
         <scene sceneID="waa-jk-L30">
             <objects>
-                <viewController storyboardIdentifier="SelfieVC" id="qwV-gx-JKT" customClass="SelfieVC" customModule="KYC_iOS_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelfieVC" id="qwV-gx-JKT" customClass="SelfieVC" customModule="FACEKI_KYC_IOS_V2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8eS-m9-3HW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
