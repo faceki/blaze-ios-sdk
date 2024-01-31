@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FACEKI-BLAZE-IOS'
-  s.version          = '3.0.0'
+  s.version          = '3.0'
   s.summary          = 'iOS SDK For FACEKI EKYC Blaze 3.0'
   s.description      = "FACEKI Blazw eKYC & Facial Recognition system, iOS SDK for verifying the user with their document and selfie"
   s.homepage         = 'https://github.com/faceki/blaze-ios-sdk'
