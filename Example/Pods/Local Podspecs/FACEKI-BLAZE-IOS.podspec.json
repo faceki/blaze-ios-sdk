@@ -1,8 +1,8 @@
 {
   "name": "FACEKI-BLAZE-IOS",
-  "version": "3.0.0",
-  "summary": "iOS SDK For FACEKI EKYC",
-  "description": "Faceki eKYC & Facial Recognition system, iOS SDK for verifying the user with their document and selfie",
+  "version": "3.0",
+  "summary": "iOS SDK For FACEKI EKYC Blaze 3.0",
+  "description": "FACEKI Blazw eKYC & Facial Recognition system, iOS SDK for verifying the user with their document and selfie",
   "homepage": "https://github.com/faceki/blaze-ios-sdk",
   "license": {
     "type": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/faceki/blaze-ios-sdk.git",
-    "tag": "3.0.0"
+    "tag": "3.0"
   },
   "swift_versions": "5.0",
   "platforms": {
