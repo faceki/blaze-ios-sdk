@@ -25,7 +25,7 @@ class ResultVC: UIViewController {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
-        self.kycVerificationApiCall(imagesData: self.imagesData!, urlString: "https://sdk.faceki.com/api/v3/kyc_verification")
+        self.kycVerificationApiCall(imagesData: self.imagesData!, urlString: "https://sdk.faceki.com/api/v3/kyc_verification/requestbylink")
         
     }
     
@@ -56,7 +56,7 @@ class ResultVC: UIViewController {
         
         Task {
             do {
-                let data = try await Request.shared.uploadMultipleImages(KYCVerification.self, method: .post, imageDatas: self.imagesData!, url: urlString, params: ["workflowId": Faceki_workflowId], authToken: Defaults.shared.getToken())
+                let data = try await Request.shared.uploadMultipleImages(KYCVerification.self, method: .post, imageDatas: self.imagesData!, url: urlString, params: ["workflowId": Faceki_workflowId,"link": Faceki_verificationLink])
              
                 self.presentFinalVC(decision: data.result?.decision ?? "")
             } catch {

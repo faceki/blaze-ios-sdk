@@ -60,10 +60,10 @@ class OnBoardingViewController: UIViewController {
         Task {
             do{
     
-                let result = try await viewModel.getToken(clientIdVal:Faceki_clientId ,clientSecretVal: Faceki_clientSecret)
-                if let token = result.data?.accessToken {
-                    Defaults.shared.setToken(token: token)
-                }
+                // let result = try await viewModel.getToken(clientIdVal:Faceki_clientId ,clientSecretVal: Faceki_clientSecret)
+                // if let token = result.data?.accessToken {
+                //     Defaults.shared.setToken(token: token)
+                // }
                 self.presetHomeVC()
             } catch (let error) {
                 print(error)

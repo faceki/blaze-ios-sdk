@@ -21,7 +21,7 @@ public class Request {
 
         var request = URLRequest(url: URL(string: ((baseUrl != nil ? baseUrl : BASE_URL) ?? BASE_URL) + url)!)
 //        header.updateValue("application/json", forKey: "Content-Type")
-        request.allHTTPHeaderFields = ["Authorization": "Bearer " + Defaults.shared.getToken(), "Content-Type": "application/json"]
+        request.allHTTPHeaderFields = [ "Content-Type": "application/json"]
         request.httpMethod = method.rawValue
 
         if let params = params {
@@ -118,8 +118,7 @@ public class Request {
         imageDatas: [(imageName: String, imageData: Data)],
         url: String,
         params: [String: String]? = nil,
-        isSnakeCase: Bool? = true,
-        authToken: String // Bearer token parameter
+        isSnakeCase: Bool? = true
     ) async throws -> T {
         if !Reachability.isConnectedToNetwork() {
             throw ServiceError.noInternetConnection
@@ -130,7 +129,7 @@ public class Request {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = header
-        request.allHTTPHeaderFields = ["Authorization": "Bearer " + Defaults.shared.getToken(), "Content-Type": "multipart/form-data; boundary=\(boundary)"]
+        request.allHTTPHeaderFields = ["Content-Type": "multipart/form-data; boundary=\(boundary)"]
         let httpBody = NSMutableData()
 
         if let params = params {
@@ -191,7 +190,7 @@ public class Request {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = header
-        request.allHTTPHeaderFields = ["Authorization": "Bearer " + Defaults.shared.getToken(), "Content-Type": "multipart/form-data; boundary=\(boundary)"]
+        request.allHTTPHeaderFields = ["Content-Type": "multipart/form-data; boundary=\(boundary)"]
         let httpBody = NSMutableData()
 
         if let params = params {

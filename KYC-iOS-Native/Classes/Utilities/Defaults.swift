@@ -20,6 +20,7 @@ class Defaults {
 var Faceki_clientSecret = ""
 var Faceki_clientId = ""
 var Faceki_workflowId = ""
+var Faceki_verificationLink = ""
 var Faceki_selfieImageUrl = "https://facekiassets.faceki.com/public/SelfieGuide.png"
 var Faceki_cardGuideUrl = "https://facekiassets.faceki.com/public/Guide.png"
 

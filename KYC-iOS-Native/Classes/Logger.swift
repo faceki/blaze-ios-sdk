@@ -12,9 +12,9 @@ public class Logger {
         print("Private")
     }
     
-    public static func initiateSMSDK(setClientID : String, setClientSecret: String, workflowId: String ,setOnComplete:(Any),redirectBack:(Any),selfieImageUrl:String?,cardGuideUrl:String?) -> UIViewController {
-        Faceki_clientId = setClientID
-        Faceki_clientSecret = setClientSecret
+    public static func initiateSMSDK( verificationLink: String, workflowId: String ,setOnComplete:(Any),redirectBack:(Any),selfieImageUrl:String?,cardGuideUrl:String?) -> UIViewController {
+     
+        Faceki_verificationLink = verificationLink
         Faceki_workflowId = workflowId
         facekiOnComplete = setOnComplete as? ([AnyHashable:Any]) -> ()
         if selfieImageUrl != nil {

@@ -1,4 +1,3 @@
-```markdown
 # FACEKI-BLAZE-IOS SDK
 
 ## Overview
@@ -40,6 +39,37 @@ Add the following usage descriptions to your Info.plist
 
 ## Usage
 
+### Initialization
+
+
+You would need to generate EKYC Link through the API here:
+
+https://docs.faceki.com/api-integration/verification-apis/generate-kyc-link
+
+In the response use the key "data" to initiate the SDK
+
+```swift
+import FACEKI_BLAZE_IOS
+
+class YourViewController: UIViewController {
+
+    @IBAction func captureAction(_ sender: Any) {
+        let smManagerVC = Logger.initiateSMSDK(
+            verificationLink: "Verification UUID Generate By API",
+            workflowId: "Workflow ID",
+            setOnComplete: onComplete,
+            redirectBack: onRedirectBack,
+            selfieImageUrl: nil,
+            cardGuideUrl: nil
+        )
+        navigationController?.pushViewController(smManagerVC, animated: true)
+    }
+
+    // ... (rest of your ViewController code)
+
+}
+```
+
 ### Callbacks
 
 Implement the following callbacks to handle the SDK responses:
@@ -68,31 +98,6 @@ func onRedirectBack() {
         // Perform UI work here
         self.navigationController?.popToRootViewController(animated: true)
     }
-}
-```
-
-### Initialization
-
-```swift
-import FACEKI_BLAZE_IOS
-
-class YourViewController: UIViewController {
-
-    @IBAction func captureAction(_ sender: Any) {
-        let smManagerVC = Logger.initiateSMSDK(
-            setClientID: "yourClientId",
-            setClientSecret: "yourClientSecret",
-            workflowId:"yourworkflowID",
-            setOnComplete: onComplete,
-            redirectBack: onRedirectBack,
-            selfieImageUrl: nil,
-            cardGuideUrl: nil
-        )
-        navigationController?.pushViewController(smManagerVC, animated: true)
-    }
-
-    // ... (rest of your ViewController code)
-
 }
 ```
 

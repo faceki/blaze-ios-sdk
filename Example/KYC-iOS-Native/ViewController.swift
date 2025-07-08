@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     @IBAction func captueACtion(_ sender: Any) {
         
         // Example Usage for FACEKI SDK
-        let smManagerVC = Logger.initiateSMSDK(setClientID : "clientid", setClientSecret: "clientSecret", workflowId: "workflowID", setOnComplete:onComplete,redirectBack: onRedirectBack,selfieImageUrl: nil,cardGuideUrl: nil)
+        let smManagerVC = Logger.initiateSMSDK(verificationLink:"",workflowId: "", setOnComplete:onComplete,redirectBack: onRedirectBack,selfieImageUrl: nil,cardGuideUrl: nil)
         navigationController?.pushViewController(smManagerVC, animated: true)
     }
     

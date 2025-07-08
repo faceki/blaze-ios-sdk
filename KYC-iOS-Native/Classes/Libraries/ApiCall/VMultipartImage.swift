@@ -35,9 +35,7 @@ open class VMultipartImage: NSObject {
         request.httpMethod = Method.POST.rawValue
         let boundary = generateBoundary()
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        if Debug! {
-            request.addValue("Bearer " + Defaults.shared.getToken(), forHTTPHeaderField: "Authorization") // ---- Testing code
-        }
+        
         let dataBody = createDataBody(withParameters: paramters, media: [mediaImage], boundary: boundary)
         request?.httpBody = dataBody
     }
