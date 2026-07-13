@@ -28,7 +28,7 @@ class IDGuidelinesVC: UIViewController {
     var isDrivingLicenseSelected : Bool?
 
     private func log(_ message: String) {
-        print("[FACEKI-IDGUIDE] \(message)")
+        _ = message
     }
     
     //MARK: -LifeCycles
@@ -50,18 +50,11 @@ class IDGuidelinesVC: UIViewController {
         addTopCancelButton(target: self, action: #selector(didTapCancel))
         addPoweredByFooter(anchoredAbove: readyButton)
 
-        log("viewDidLoad")
-        log("Faceki_cardGuideUrl = \(Faceki_cardGuideUrl ?? "nil")")
-        log("framework bundle = \(frameworkImageBundle.bundlePath)")
-        log("assets bundle = \(sdkAssetsBundle.bundlePath)")
-        
         if let guideUrlString = Faceki_cardGuideUrl,
            !guideUrlString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
            let url = URL(string: guideUrlString) {
-            log("Using remote guide URL")
             downloadImage(from: url)
         } else {
-            log("No guide URL found, loading fallback GIF")
             loadFallbackGuideGif()
         }
     }
@@ -89,21 +82,14 @@ class IDGuidelinesVC: UIViewController {
         log("Downloading image from URL: \(url.absoluteString)")
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self else { return }
-            if let http = response as? HTTPURLResponse {
-                self.log("Download HTTP status: \(http.statusCode)")
-            }
-            if let error = error {
-                self.log("Download error: \(error.localizedDescription)")
-            }
+            _ = response
+            _ = error
             guard let data = data, let image = UIImage(data: data) else {
-                self.log("Download succeeded but data could not decode as UIImage. Falling back to GIF.")
                 DispatchQueue.main.async {
                     self.loadFallbackGuideGif()
                 }
                 return
             }
-
-            self.log("Remote image decoded. bytes=\(data.count) size=\(image.size.width)x\(image.size.height)")
 
             DispatchQueue.main.async {
                 self.guideImage.image = image
@@ -113,7 +99,6 @@ class IDGuidelinesVC: UIViewController {
 
     private func loadFallbackGuideGif() {
         if playGif(named: "qjejkS") {
-            log("GIF fallback is playing")
             return
         }
 
@@ -154,16 +139,13 @@ class IDGuidelinesVC: UIViewController {
         ] + Bundle.allBundles + Bundle.allFrameworks)
 
         for bundle in candidateBundles {
-            log("Searching bundle: \(bundle.bundlePath)")
             if let directURL = bundle.url(forResource: name, withExtension: "gif"),
                let source = CGImageSourceCreateWithURL(directURL as CFURL, nil) {
-                log("Found GIF (direct): \(directURL.path)")
                 return source
             }
 
             if let assetsURL = bundle.url(forResource: name, withExtension: "gif", subdirectory: "Assets"),
                let source = CGImageSourceCreateWithURL(assetsURL as CFURL, nil) {
-                log("Found GIF (Assets subdir): \(assetsURL.path)")
                 return source
             }
 
@@ -172,14 +154,11 @@ class IDGuidelinesVC: UIViewController {
                 for case let fileURL as URL in enumerator {
                     if fileURL.lastPathComponent.lowercased() == "\(name.lowercased()).gif",
                        let source = CGImageSourceCreateWithURL(fileURL as CFURL, nil) {
-                        log("Found GIF (recursive): \(fileURL.path)")
                         return source
                     }
                 }
             }
         }
-
-        log("GIF not found in any searched bundle")
         return nil
     }
 

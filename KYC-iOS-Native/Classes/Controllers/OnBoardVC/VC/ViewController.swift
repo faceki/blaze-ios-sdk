@@ -88,8 +88,7 @@ class ViewController: UIViewController {
                 
                 Faceki_workflowId = result.result?.workflowId ?? ""
                 
-            } catch (let error) {
-                print(error)
+            } catch {
                 self.stopActivityIndicator()
                 if let serviceError = error as? ServiceError,
                    case .noInternetConnection = serviceError {

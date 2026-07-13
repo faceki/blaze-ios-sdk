@@ -40,7 +40,7 @@ class SelfieGuidlinesVC: UIViewController {
     var isDrivingLicenseSelected : Bool?
 
     private func log(_ message: String) {
-        print("[FACEKI-SELFIEGUIDE] \(message)")
+        _ = message
     }
     
     override func viewDidLoad() {
@@ -64,16 +64,11 @@ class SelfieGuidlinesVC: UIViewController {
         addTopCancelButton(target: self, action: #selector(didTapCancel))
         addPoweredByFooter(anchoredAbove: readyButton)
 
-        log("viewDidLoad")
-        log("Faceki_selfieImageUrl = \(Faceki_selfieImageUrl ?? "nil")")
-
         if let selfieUrlString = Faceki_selfieImageUrl,
            !selfieUrlString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
            let url = URL(string: selfieUrlString) {
-            log("Using remote selfie guide URL")
             downloadImage(from: url)
         } else {
-            log("No selfie guide URL found, loading fallback GIF")
             loadFallbackGuideGif()
         }
     }
@@ -120,24 +115,16 @@ class SelfieGuidlinesVC: UIViewController {
     
     
     private func downloadImage(from url: URL) {
-        log("Downloading image from URL: \(url.absoluteString)")
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self else { return }
-            if let http = response as? HTTPURLResponse {
-                self.log("Download HTTP status: \(http.statusCode)")
-            }
-            if let error = error {
-                self.log("Download error: \(error.localizedDescription)")
-            }
+            _ = response
+            _ = error
             guard let data = data, let image = UIImage(data: data) else {
-                self.log("Download failed or data invalid. Falling back to GIF.")
                 DispatchQueue.main.async {
                     self.loadFallbackGuideGif()
                 }
                 return
             }
-
-            self.log("Remote image decoded. bytes=\(data.count) size=\(image.size.width)x\(image.size.height)")
 
             DispatchQueue.main.async {
                 self.guideImage.stopAnimating()
@@ -148,19 +135,15 @@ class SelfieGuidlinesVC: UIViewController {
     }
 
     private func loadFallbackGuideGif() {
-        log("Attempting GIF fallback: SelfieGif.gif")
         if playGif(named: "SelfieGif") {
-            log("GIF fallback is playing")
             return
         }
 
-        log("GIF fallback failed. Using static selfieGuide.png")
         guideImage.image = UIImage(named: "selfieGuide.png", in: sdkAssetsBundle, compatibleWith: nil)
     }
 
     private func playGif(named name: String) -> Bool {
         guard let source = gifSource(named: name) else {
-            log("GIF source not found for \(name)")
             return false
         }
 
@@ -198,13 +181,11 @@ class SelfieGuidlinesVC: UIViewController {
         for bundle in candidateBundles {
             if let directURL = bundle.url(forResource: name, withExtension: "gif"),
                let source = CGImageSourceCreateWithURL(directURL as CFURL, nil) {
-                log("Found GIF (direct): \(directURL.path)")
                 return source
             }
 
             if let assetsURL = bundle.url(forResource: name, withExtension: "gif", subdirectory: "Assets"),
                let source = CGImageSourceCreateWithURL(assetsURL as CFURL, nil) {
-                log("Found GIF (Assets subdir): \(assetsURL.path)")
                 return source
             }
 
@@ -213,14 +194,11 @@ class SelfieGuidlinesVC: UIViewController {
                 for case let fileURL as URL in enumerator {
                     if fileURL.lastPathComponent.lowercased() == "\(name.lowercased()).gif",
                        let source = CGImageSourceCreateWithURL(fileURL as CFURL, nil) {
-                        log("Found GIF (recursive): \(fileURL.path)")
                         return source
                     }
                 }
             }
         }
-
-        log("GIF not found in any searched bundle")
         return nil
     }
 

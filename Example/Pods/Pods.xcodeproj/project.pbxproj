@@ -113,7 +113,6 @@
 		2E1AB89FC7B2C83A467AE27C0BE94231 /* ShapeTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DA4FF953BCD4B02C988D46BF751D8B /* ShapeTransform.swift */; };
 		2E257C475E1E6BC613EA8D95ED7FB706 /* Entry+ZIP64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2817BB7189846B1B050E905FDC4FC13C /* Entry+ZIP64.swift */; };
 		2ED5475EEF611690F9A9C074A13DD2DB /* ShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315AD7367B2800B405896C74D6024A2 /* ShapeNode.swift */; };
-		2F96010CB431A4AC42E6A2D8A357DE13 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8591E810AEE62171AB392A8DDC378D /* OnBoardingViewModel.swift */; };
 		30BEC23C706880469F2817973100A452 /* InvertedMatteLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B397F4A78270ED733D4000B260C91 /* InvertedMatteLayer.swift */; };
 		30F0FBD8BC75F2D4013101DD77F62DD4 /* VMultipartImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25C760C337F09E3AA5A14545BB6898 /* VMultipartImage.swift */; };
 		31121DBFF1A98D4B8FD4DCF45EF27CC3 /* LottieAnimationViewInitializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13776B3913DE3F0E695A5CC75137A408 /* LottieAnimationViewInitializers.swift */; };
@@ -1054,7 +1053,6 @@
 		9BBD838E0CA647EB17FB3A3D6BD4FBAE /* LayerProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayerProperty.swift; path = Sources/Private/CoreAnimation/Animations/LayerProperty.swift; sourceTree = "<group>"; };
 		9C0B268B879F2817303F62BF97BA685E /* DotLottieConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DotLottieConfiguration.swift; path = Sources/Public/DotLottie/DotLottieConfiguration.swift; sourceTree = "<group>"; };
 		9C0BA545F796A17B9FF0C426DAFB7931 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		9C8591E810AEE62171AB392A8DDC378D /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		9C92F6C80C6741DBB95CF32931C5D9D7 /* EllipseAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EllipseAnimation.swift; sourceTree = "<group>"; };
 		9CD96B52EA979B3CB671E5FD7AC00DEE /* DropShadowStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DropShadowStyle.swift; sourceTree = "<group>"; };
 		9D3707A31D129F92E0D636D0E02E4CDB /* ReducedMotionOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReducedMotionOption.swift; sourceTree = "<group>"; };
@@ -2480,7 +2478,6 @@
 		AF4556D1F13A9E69207E4B6F647965C6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				9C8591E810AEE62171AB392A8DDC378D /* OnBoardingViewModel.swift */,
 			);
 			name = ViewModel;
 			path = ViewModel;
@@ -3590,7 +3587,6 @@
 				F5D38673350F1AA15E87F8E103C7C75E /* NullCompositionLayer.swift in Sources */,
 				BE6C4E7436554650ED7AD56E8E856FA0 /* OnBoardingModel.swift in Sources */,
 				E29A8D20DB2153147D9BAB58DC6DA618 /* OnBoardingViewController.swift in Sources */,
-				2F96010CB431A4AC42E6A2D8A357DE13 /* OnBoardingViewModel.swift in Sources */,
 				B3E759839C2F91951B4F89A2DD437987 /* OpacityAnimation.swift in Sources */,
 				5E4B71A103FC64E3590DCEC3049CD10E /* PassThroughOutputNode.swift in Sources */,
 				3A587F1F855EF4BD083769566CCF675E /* PathElement.swift in Sources */,

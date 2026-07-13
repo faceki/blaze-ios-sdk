@@ -80,8 +80,7 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
         stopActivityIndicator()
         if let imageData = photo.fileDataRepresentation() {
             if let capturedImage = UIImage(data: imageData) {
-                
-                /// ToDO
+
                 if let selfieImgData = capturedImage.convertImageToJPEGData() {
                     
                     if (self.model?.document_optional ?? false) {
@@ -159,15 +158,10 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
                                        (imageName: "drivingLicense_back", imageData: drivingLicenseBackImgData)
                                    ]
                             }
-                            for (index, (documentType, images)) in imagesByType.enumerated() {
-                                print("Index: \(index)")
-                                print("Document Type: \(documentType)")
+                            for (index, (_, images)) in imagesByType.enumerated() {
 
                                 for (imageName, imageData) in images {
-                                    print("  Image Name: \(imageName)")
-                                                  
                                     if imageName.contains("back") {
-                                        print("    This image contains 'back'")
                                         self.imagesData?.append(contentsOf: [
                                             (imageName: "document_\(index + 1)_back", imageData: imageData)
                                         ])
@@ -268,8 +262,6 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
         
         if let videoConnection = capturePhotoOutput.connection(with: .video) {
             capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
-        } else {
-            print("No active and enabled video connection")
         }
     }
     
@@ -291,7 +283,6 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
             if device.position == AVCaptureDevice.Position.front {
                 captureDevice = device
                 if captureDevice != nil {
-                    print("Capture device found")
                     beginSession()
                 }
             }

@@ -36,9 +36,6 @@ public class Request {
         
         let (data, response) = try await session.data(for: request)
         
-        print("----------RESPONSE----------")
-        print(String(decoding: data, as: UTF8.self))
-        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw ServiceError.custom("Invalid response")
         }
@@ -52,8 +49,6 @@ public class Request {
             let JSON = try decoder.decode(type, from: data)
             return JSON
         default:
-            print("----------Error----------")
-            print("Error code: \(String(describing: httpResponse.status))")
             throw ServiceError.custom("Error code: \(String(describing: httpResponse.status))")
         }
     }
@@ -88,7 +83,7 @@ public class Request {
                 return jsonString
             }
         } catch {
-            print("Error parsing JSON: \(error.localizedDescription)")
+            return nil
         }
         
         return nil
@@ -100,14 +95,11 @@ public class Request {
             
             // Check if the parsed object is a dictionary
             guard let jsonDictionary = jsonObject as? [AnyHashable: Any] else {
-                print("Error: Parsed JSON is not a dictionary")
                 return nil
             }
             
             return jsonDictionary
         } catch {
-            // Handle the error appropriately, e.g., log it or re-throw
-            print("Error parsing JSON: \(error.localizedDescription)")
             return nil
         }
     }
@@ -161,9 +153,6 @@ public class Request {
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw ServiceError.custom("Invalid response")
-        }
-        if let prettyJson = self.prettyPrintJSON(from: data) {
-            print(prettyJson)
         }
         if let parsedJSONval = parseJSON(from: data) {
             facekiOnComplete?(parsedJSONval)
@@ -222,7 +211,6 @@ public class Request {
         switch httpResponse.status?.responseType {
         case .success:
             let JSON = try JSONDecoder().decode(type, from: data)
-            print(self.prettyPrintJSON(from: data)!)
             return JSON
         default:
             let JSON = try JSONDecoder().decode(ErrorModel.self, from: data)

@@ -95,7 +95,6 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
             if device.position == AVCaptureDevice.Position.back {
                 captureDevice = device
                 if captureDevice != nil {
-                    print("Capture device found")
                     beginSession()
                 }
             }
@@ -164,7 +163,6 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
             capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
         } else {
             hideProcessingLoader()
-            print("No active and enabled video connection")
         }
     }
     
@@ -214,17 +212,10 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {
             if let image = UIImage(data: imageData) {
-                
-                
-                /// ToDO
                let newimage = image.scale(newWidth: 640)
                let datax = newimage.convertImageToJPEGData()
-                /// ToDO xxx
                 var imagelooksFine : Bool?
-                let uniqueImageName = UUID().uuidString
-                
-                print(datax?.base64EncodedData())
-                //haziq
+
                 if let jpegData = datax {
                  
                     Task {
@@ -233,7 +224,6 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                             hideProcessingLoader()
                             
                             imagelooksFine = data.liveness?.actual
-#warning("Change this line (imagelooksFine ?? true) to this (imagelooksFine ?? false) after Development.")
                             if  (imagelooksFine ?? false) {
                                 
                                 if self.model?.document_optional ?? false {
@@ -354,8 +344,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                                 self.unhideQualityCheckViewWithAnimation(view : qualityCheckErrorView)
                                 self.hideQualityCheckViewWithAnimation(view : qualityCheckErrorView)
                             }
-                        } catch (let error) {
-                            print(error)
+                        } catch {
                             hideProcessingLoader()
                             if let serviceError = error as? ServiceError,
                                case .noInternetConnection = serviceError {

@@ -6,9 +6,6 @@ class OnBoardingViewController: UIViewController {
     @IBOutlet weak var lottieAnimationView : UIView!
     @IBOutlet weak var facekiLogo : UIImageView!
 
-    //MARK: -Properties
-    var viewModel = OnBoardingViewModel()
-    
     //MARK: -lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,10 +14,6 @@ class OnBoardingViewController: UIViewController {
                }
         
         addPoweredByFooter()
-
-        if let url = URL(string: "https://facekiassets.faceki.com/public/powerbyFaceki.png") {
-                  downloadImage(from: url)
-              }
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -58,24 +51,9 @@ class OnBoardingViewController: UIViewController {
     
          
                 self.presetHomeVC()
-            } catch (let error) {
-                print(error)
+            } catch {
                 Utility.showAlertWithOk(title: "Error", message: "An error Occurred, try again later.")
             }
         }
     }
-    
-    func downloadImage(from url: URL) {
-          URLSession.shared.dataTask(with: url) { data, response, error in
-              if let data = data {
-                  // Ensure that the downloaded data is a valid image
-                  if let image = UIImage(data: data) {
-                      // Update the UI on the main thread
-                      DispatchQueue.main.async {
-                          self.facekiLogo.image = image
-                      }
-                  }
-              }
-          }.resume()
-      }
 }

@@ -2,11 +2,7 @@ import Foundation
 import UIKit
 
 public class Logger {
-        
-    func privateMethod(){
-        print("Private")
-    }
-    
+
     public static func initiateSMSDK(
         verificationLink: String,
         setOnComplete: (Any),

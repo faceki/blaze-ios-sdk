@@ -21,9 +21,7 @@ class Utility {
     class func showAlertWithOk(title: String, message : String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            print("OK button tapped")
-        }
+        let okAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(okAction)
         if let topViewController = UIApplication.shared.keyWindow?.rootViewController {
             topViewController.present(alertController, animated: true, completion: nil)
