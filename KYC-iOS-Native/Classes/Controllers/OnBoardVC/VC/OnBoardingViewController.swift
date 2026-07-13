@@ -1,9 +1,3 @@
-//
-//  OnBoardingViewController.swift
-//  ScanDocument
-//
-//
-
 import UIKit
 
 class OnBoardingViewController: UIViewController {
@@ -22,6 +16,8 @@ class OnBoardingViewController: UIViewController {
                    overrideUserInterfaceStyle = .light
                }
         
+        addPoweredByFooter()
+
         if let url = URL(string: "https://facekiassets.faceki.com/public/powerbyFaceki.png") {
                   downloadImage(from: url)
               }
@@ -60,10 +56,7 @@ class OnBoardingViewController: UIViewController {
         Task {
             do{
     
-                // let result = try await viewModel.getToken(clientIdVal:Faceki_clientId ,clientSecretVal: Faceki_clientSecret)
-                // if let token = result.data?.accessToken {
-                //     Defaults.shared.setToken(token: token)
-                // }
+         
                 self.presetHomeVC()
             } catch (let error) {
                 print(error)

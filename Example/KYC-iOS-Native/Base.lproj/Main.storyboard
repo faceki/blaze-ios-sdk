@@ -19,28 +19,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW5-RT-LJk">
+                                <rect key="frame" x="20" y="204" width="335" height="260"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="FACEKI Blaze SDK" translatesAutoresizingMaskIntoConstraints="NO" id="cQm-4n-JdP">
+                                        <rect key="frame" x="20" y="20" width="148" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" red="0.0666666667" green="0.0666666667" blue="0.0666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="A polished example integration for document verification, selfie capture, and completion callbacks." textAlignment="left" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="j6W-RQ-kVw">
+                                        <rect key="frame" x="20" y="56" width="295" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.2431372549" green="0.2431372549" blue="0.2431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2L-Zd-K2a">
+                                        <rect key="frame" x="20" y="114" width="295" height="94"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="• Pass a verification link from your backend." translatesAutoresizingMaskIntoConstraints="NO" id="H7L-aU-Ps1">
+                                                <rect key="frame" x="0.0" y="0.0" width="244" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.2431372549" green="0.2431372549" blue="0.2431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="• Optional guide URLs customize selfie and card screens." translatesAutoresizingMaskIntoConstraints="NO" id="A4Q-iu-2kF">
+                                                <rect key="frame" x="0.0" y="24" width="311" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.2431372549" green="0.2431372549" blue="0.2431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="• Theme colors can be passed at init time." translatesAutoresizingMaskIntoConstraints="NO" id="Q3k-sd-Kc9">
+                                                <rect key="frame" x="0.0" y="48" width="247" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.2431372549" green="0.2431372549" blue="0.2431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="• Completion, redirect, and cancel callbacks are supported." translatesAutoresizingMaskIntoConstraints="NO" id="Y8v-RX-2uV">
+                                                <rect key="frame" x="0.0" y="72" width="312" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.2431372549" green="0.2431372549" blue="0.2431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </label>
+                                        </subviews>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTL-GB-u6O">
-                                <rect key="frame" x="20" y="603" width="335" height="44"/>
-                                <color key="backgroundColor" red="0.26553809639999998" green="0.5440240502" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="545" width="335" height="44"/>
+                                <color key="backgroundColor" red="0.2235294118" green="0.7019607843" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6OG-Wf-rf9"/>
                                 </constraints>
-                                <state key="normal" title="CAPTURE">
+                                <state key="normal" title="Launch SDK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="captueACtion:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6Ya-gN-YQu"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Powered by" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TnV-Jd-BNf">
+                                <rect key="frame" x="145" y="607" width="85" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.4235294118" green="0.4235294118" blue="0.4235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBw-LO-go1">
+                                <rect key="frame" x="237" y="604" width="73" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="0LG-Mg-pU7"/>
+                                    <constraint firstAttribute="width" constant="73" id="3Qm-Hi-sJ4"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nTL-GB-u6O" secondAttribute="bottom" constant="20" id="4K3-08-f6U"/>
+                            <constraint firstItem="gW5-RT-LJk" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="-6" id="2hA-Vr-2cM"/>
+                            <constraint firstItem="gW5-RT-LJk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="2qA-Ts-1eQ"/>
+                            <constraint firstItem="gW5-RT-LJk" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" constant="-20" id="4gM-Lz-6bJ"/>
                             <constraint firstAttribute="trailing" secondItem="nTL-GB-u6O" secondAttribute="trailing" constant="20" id="6a1-ps-UeZ"/>
                             <constraint firstItem="nTL-GB-u6O" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="Q1F-u5-XfD"/>
+                            <constraint firstItem="nTL-GB-u6O" firstAttribute="bottom" secondItem="TnV-Jd-BNf" secondAttribute="top" constant="-14" id="4K3-08-f6U"/>
+                            <constraint firstItem="TnV-Jd-BNf" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" constant="-14" id="9mL-Pk-jT8"/>
+                            <constraint firstItem="TnV-Jd-BNf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="135" id="d9F-Hc-Jw5"/>
+                            <constraint firstItem="PBw-LO-go1" firstAttribute="leading" secondItem="TnV-Jd-BNf" secondAttribute="trailing" constant="8" id="b2M-U2-NF4"/>
+                            <constraint firstItem="PBw-LO-go1" firstAttribute="centerY" secondItem="TnV-Jd-BNf" secondAttribute="centerY" id="7sU-pw-oK8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AJe-bX-vvp"/>
+                    <connections>
+                        <outlet property="poweredByLogoImageView" destination="PBw-LO-go1" id="u1V-Mn-0xP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

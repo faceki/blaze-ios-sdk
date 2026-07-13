@@ -15,6 +15,7 @@ class ResultVC: UIViewController {
     
     //MARK: -Outlets
     @IBOutlet weak var lottieAnimationView : UIView!
+    @IBOutlet weak var loadingLabel : UILabel!
     
     var imagesData : [(imageName: String, imageData: Data)]?
     var model : ResultModel?
@@ -25,6 +26,8 @@ class ResultVC: UIViewController {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
+        applyTheme()
+        guard requireInternetConnection() else { return }
         self.kycVerificationApiCall(imagesData: self.imagesData!, urlString: "https://sdk.faceki.com/api/v3/kyc_verification/requestbylink")
         
     }
@@ -37,6 +40,13 @@ class ResultVC: UIViewController {
     }
     
     //MARK: -Methods
+    private func applyTheme() {
+        view.backgroundColor = .white
+        loadingLabel.textColor = FacekiThemeColor.heading
+        loadingLabel.font = UIFont.systemFont(ofSize: FacekiTypography.headingSubtitle, weight: .semibold)
+        addPoweredByFooter()
+    }
+
     private func loadAnimation(){
         let animationView = LottieAnimationView(name: "lottieLoading.json", bundle: frameworkImageBundle)
         animationView.frame = lottieAnimationView.bounds
@@ -60,6 +70,11 @@ class ResultVC: UIViewController {
              
                 self.presentFinalVC(decision: data.result?.decision ?? "")
             } catch {
+                if let serviceError = error as? ServiceError,
+                   case .noInternetConnection = serviceError {
+                    Utility.showAlertWithOk(title: "No Internet Connection", message: "Please reconnect to continue verification.")
+                    return
+                }
                 self.presentFinalVC(decision: "")
             }
         }

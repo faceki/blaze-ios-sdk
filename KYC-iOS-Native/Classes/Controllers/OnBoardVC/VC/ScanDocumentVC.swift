@@ -1,9 +1,3 @@
-//
-//  ScanDocumentVC.swift
-//  ScanDocument
-//
-//
-
 import UIKit
 import AVFoundation
 import AudioToolbox
@@ -20,12 +14,18 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
     @IBOutlet weak var overLayView2: UIView!
     @IBOutlet weak var captureView: UIView!
     @IBOutlet weak var safeAreaView: UIView!
+    @IBOutlet weak var cameraHeaderTitleLabel: UILabel!
+    @IBOutlet weak var cameraHeaderSubtitleLabel: UILabel!
     @IBOutlet weak var scanTitle: UILabel!
     @IBOutlet weak var captureButton: UIButton!
     @IBOutlet weak var qualityCheckErrorView: UIView!
     @IBOutlet weak var errorDescription : UILabel!
     @IBOutlet weak var errorTitle : UILabel!
     @IBOutlet weak var idCardFlipView: UIView!
+    private var topCancelButton: UIButton?
+    private var processingOverlay: UIView?
+    private var processingIndicator: UIActivityIndicatorView?
+    private var processingLabel: UILabel?
     
     
     //MARK: -Properties
@@ -52,6 +52,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
+        applyCameraTheme()
         qualityCheckErrorView.isHidden = true
         qualityCheckErrorView.clipsToBounds = true
         
@@ -99,11 +100,36 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                 }
             }
         }
+
+        topCancelButton = addTopCancelButton(target: self, action: #selector(didTapCancel))
+        topCancelButton?.tintColor = .white
+        addPoweredByFooter()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        captureButton.layer.cornerRadius = captureButton.bounds.height / 2
+        processingOverlay?.frame = view.bounds
     }
     
     //MARK: -Actions
     @IBAction private func didTapBack(_ sender : UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc private func didTapCancel() {
+        cancelSDKFlow()
+    }
+
+    private func applyCameraTheme() {
+        cameraHeaderTitleLabel.textColor = FacekiThemeColor.cameraPageTitle
+        cameraHeaderSubtitleLabel.textColor = .white
+        scanTitle.textColor = .white
+        errorTitle.textColor = FacekiThemeColor.heading
+        errorDescription.textColor = FacekiThemeColor.textSecondary
+        captureButton.backgroundColor = FacekiThemeColor.primaryButtonBackground
+        captureButton.tintColor = FacekiThemeColor.primaryButtonText
+        captureButton.layer.masksToBounds = true
     }
     
     private func flipIDCardAnimation(){
@@ -123,12 +149,13 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     @IBAction func capturePhoto(_ sender : UIButton) {
-        DispatchQueue.main.async {[weak self] in
-            guard let self else { return}
-            startActivityIndicator(style: .large)
-        }
+        guard requireInternetConnection() else { return }
+        showProcessingLoader(message: "Processing image...")
         
-        guard let capturePhotoOutput = capturePhotoOutput else { return }
+        guard let capturePhotoOutput = capturePhotoOutput else {
+            hideProcessingLoader()
+            return
+        }
         
         let photoSettings = AVCapturePhotoSettings()
         photoSettings.flashMode = .auto
@@ -136,6 +163,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
         if let videoConnection = capturePhotoOutput.connection(with: .video) {
             capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
         } else {
+            hideProcessingLoader()
             print("No active and enabled video connection")
         }
     }
@@ -202,7 +230,7 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                     Task {
                         do {
                             let data = try await Request.shared.uploadData(AdvanceDetectModel.self, method: .post, imageData: jpegData, url: "https://addon.faceki.com/advance/detect", imageName: "image")
-                            stopActivityIndicator()
+                            hideProcessingLoader()
                             
                             imagelooksFine = data.liveness?.actual
 #warning("Change this line (imagelooksFine ?? true) to this (imagelooksFine ?? false) after Development.")
@@ -328,7 +356,13 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
                             }
                         } catch (let error) {
                             print(error)
-                            stopActivityIndicator()
+                            hideProcessingLoader()
+                            if let serviceError = error as? ServiceError,
+                               case .noInternetConnection = serviceError {
+                                Utility.showAlertWithOk(title: "No Internet Connection", message: "Please reconnect to continue document verification.")
+                                return
+                            }
+                            Utility.showAlertWithOk(title: "Error", message: "An error Occurred, try again later.")
                         }
                     }
                 }
@@ -461,6 +495,71 @@ class ScanDocumentVC: UIViewController, AVCapturePhotoCaptureDelegate {
         
         DispatchQueue.global().async {
             self.captureSession.startRunning()
+        }
+    }
+
+    private func showProcessingLoader(message: String) {
+        if processingOverlay == nil {
+            let overlay = UIView(frame: view.bounds)
+            overlay.backgroundColor = UIColor(white: 0.0, alpha: 0.45)
+            overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            let container = UIView()
+            container.translatesAutoresizingMaskIntoConstraints = false
+            container.backgroundColor = UIColor(white: 0.0, alpha: 0.72)
+            container.layer.cornerRadius = 14
+            container.layer.masksToBounds = true
+
+            let indicator = UIActivityIndicatorView(style: .large)
+            indicator.translatesAutoresizingMaskIntoConstraints = false
+            indicator.color = .white
+
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = .white
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            label.numberOfLines = 2
+
+            container.addSubview(indicator)
+            container.addSubview(label)
+            overlay.addSubview(container)
+
+            NSLayoutConstraint.activate([
+                container.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
+                container.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
+                container.widthAnchor.constraint(equalToConstant: 190),
+                container.heightAnchor.constraint(equalToConstant: 130),
+
+                indicator.topAnchor.constraint(equalTo: container.topAnchor, constant: 24),
+                indicator.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+
+                label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
+                label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12),
+                label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -20)
+            ])
+
+            processingOverlay = overlay
+            processingIndicator = indicator
+            processingLabel = label
+        }
+
+        processingLabel?.text = message
+        captureButton.isEnabled = false
+
+        if let overlay = processingOverlay, overlay.superview == nil {
+            view.addSubview(overlay)
+        }
+
+        processingIndicator?.startAnimating()
+    }
+
+    private func hideProcessingLoader() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.processingIndicator?.stopAnimating()
+            self.processingOverlay?.removeFromSuperview()
+            self.captureButton.isEnabled = true
         }
     }
 }

@@ -1,9 +1,3 @@
-//
-//  SelfieVC.swift
-//  ScanDocument
-//
-//
-
 import UIKit
 import AVFoundation
 import AudioToolbox
@@ -22,6 +16,9 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
     @IBOutlet weak var captureButton: UIButton!
     @IBOutlet weak var safeAreaView : UIView!
     @IBOutlet weak var overlayImage : UIImageView!
+    @IBOutlet weak var cameraHeaderTitleLabel: UILabel!
+    @IBOutlet weak var cameraHeaderSubtitleLabel: UILabel!
+    private var topCancelButton: UIButton?
     
     
     
@@ -49,14 +46,34 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
+        applyCameraTheme()
         self.configureCam()
         navigationController?.navigationBar.isHidden = true
+        topCancelButton = addTopCancelButton(target: self, action: #selector(didTapCancel))
+        topCancelButton?.tintColor = .white
         
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        captureButton.layer.cornerRadius = captureButton.bounds.height / 2
     }
     
     //MARK: -Actions
     @IBAction private func didTapBack(_ sender : UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc private func didTapCancel() {
+        cancelSDKFlow()
+    }
+
+    private func applyCameraTheme() {
+        cameraHeaderTitleLabel.textColor = FacekiThemeColor.cameraPageTitle
+        cameraHeaderSubtitleLabel.textColor = .white
+        captureButton.backgroundColor = FacekiThemeColor.primaryButtonBackground
+        captureButton.tintColor = FacekiThemeColor.primaryButtonText
+        captureButton.layer.masksToBounds = true
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -238,6 +255,7 @@ class SelfieVC: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     @IBAction func capturePhoto(_ sender : UIButton) {
+        guard requireInternetConnection() else { return }
         DispatchQueue.main.async {[weak self] in
             guard let self else { return}
             startActivityIndicator(style: .large)

@@ -220,6 +220,9 @@
                     </view>
                     <connections>
                         <outlet property="lottieAnimationView" destination="5wH-Od-haI" id="0Bj-Rb-40r"/>
+                        <outlet property="nextButton" destination="AJD-A4-czh" id="Ab7-I4-7U1"/>
+                        <outlet property="subtitleLabel" destination="zCH-BD-HA4" id="hPS-mS-Tsk"/>
+                        <outlet property="titleLabel" destination="1ne-3O-C7j" id="hVx-04-DS5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -446,12 +449,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="Ql9-dv-vLq" id="j4d-u5-a5R"/>
                         <outlet property="drivingLicenseCircle" destination="R0V-V6-JqG" id="zP5-RA-wdH"/>
                         <outlet property="drivingLicenseView" destination="bio-xM-XRJ" id="qnq-0d-7ud"/>
                         <outlet property="idCardCircle" destination="fzB-Re-FQI" id="BPe-4d-QFC"/>
                         <outlet property="idCardView" destination="etb-Fu-o7Q" id="Pzi-7Q-AUd"/>
+                        <outlet property="nextButton" destination="9qL-Ce-OgU" id="MLl-9Q-l8h"/>
                         <outlet property="passportCircle" destination="tfP-LQ-Uis" id="LjI-23-FRG"/>
                         <outlet property="passportView" destination="eev-Cr-99G" id="NWR-Ty-Idv"/>
+                        <outlet property="subtitleLabel" destination="J1S-TZ-VjR" id="3yq-sE-lTX"/>
+                        <outlet property="titleLabel" destination="hYi-dP-PhG" id="Wm7-Eh-zq3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMg-hR-SMI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -502,7 +509,6 @@
                                 <rect key="frame" x="279" y="679" width="110" height="37"/>
                                 <color key="backgroundColor" red="1" green="0.58520018640000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="F0g-rL-Ser"/>
                                     <constraint firstAttribute="height" constant="37" id="v4l-Uo-oK6"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -810,24 +816,29 @@
                         <constraints>
                             <constraint firstItem="gqE-dU-7sh" firstAttribute="top" secondItem="m4h-10-j2l" secondAttribute="bottom" constant="20" id="0Ec-gX-khy"/>
                             <constraint firstItem="tX3-sZ-mRV" firstAttribute="trailing" secondItem="m4h-10-j2l" secondAttribute="trailing" constant="35" id="16g-qx-daQ"/>
-                            <constraint firstItem="m4h-10-j2l" firstAttribute="top" secondItem="nyY-ex-fbZ" secondAttribute="bottom" constant="50.670000000000002" id="6CI-S1-TeC"/>
-                            <constraint firstItem="rYP-2G-gAH" firstAttribute="top" secondItem="tX3-sZ-mRV" secondAttribute="top" constant="30" id="B2Y-dI-0cQ"/>
+                            <constraint firstItem="m4h-10-j2l" firstAttribute="top" secondItem="nyY-ex-fbZ" secondAttribute="bottom" constant="42" id="6CI-S1-TeC"/>
+                            <constraint firstItem="rYP-2G-gAH" firstAttribute="leading" secondItem="tX3-sZ-mRV" secondAttribute="leading" constant="35" id="9WA-vG-r1F"/>
+                            <constraint firstItem="rYP-2G-gAH" firstAttribute="top" secondItem="tX3-sZ-mRV" secondAttribute="top" constant="56" id="B2Y-dI-0cQ"/>
                             <constraint firstItem="XCb-AS-tiA" firstAttribute="leading" secondItem="gqE-dU-7sh" secondAttribute="trailing" constant="5" id="Eom-vX-rHt"/>
                             <constraint firstItem="XCb-AS-tiA" firstAttribute="centerY" secondItem="gqE-dU-7sh" secondAttribute="centerY" id="GpF-eW-ddc"/>
                             <constraint firstItem="tX3-sZ-mRV" firstAttribute="trailing" secondItem="3ga-xN-hAu" secondAttribute="trailing" constant="25" id="KwJ-Gd-1xN"/>
                             <constraint firstItem="tX3-sZ-mRV" firstAttribute="bottom" secondItem="3ga-xN-hAu" secondAttribute="bottom" constant="20" id="Pn5-ZS-w9H"/>
+                            <constraint firstItem="nyY-ex-fbZ" firstAttribute="leading" secondItem="tX3-sZ-mRV" secondAttribute="leading" constant="35" id="Q3v-Na-jUu"/>
                             <constraint firstItem="gqE-dU-7sh" firstAttribute="leading" secondItem="tX3-sZ-mRV" secondAttribute="leading" constant="45" id="W9S-GV-fOv"/>
-                            <constraint firstItem="rYP-2G-gAH" firstAttribute="centerX" secondItem="7dD-Ly-2uG" secondAttribute="centerX" id="Zrd-QW-mIc"/>
-                            <constraint firstItem="VrX-m1-Ecr" firstAttribute="top" secondItem="tX3-sZ-mRV" secondAttribute="top" constant="10" id="c6i-e4-YWu"/>
-                            <constraint firstItem="nyY-ex-fbZ" firstAttribute="centerX" secondItem="7dD-Ly-2uG" secondAttribute="centerX" id="fQg-dZ-WT8"/>
-                            <constraint firstItem="nyY-ex-fbZ" firstAttribute="top" secondItem="rYP-2G-gAH" secondAttribute="bottom" constant="15" id="hbt-kf-LHh"/>
+                            <constraint firstItem="VrX-m1-Ecr" firstAttribute="top" secondItem="tX3-sZ-mRV" secondAttribute="top" constant="8" id="c6i-e4-YWu"/>
+                            <constraint firstItem="nyY-ex-fbZ" firstAttribute="top" secondItem="rYP-2G-gAH" secondAttribute="bottom" constant="12" id="hbt-kf-LHh"/>
                             <constraint firstItem="m4h-10-j2l" firstAttribute="leading" secondItem="tX3-sZ-mRV" secondAttribute="leading" constant="35" id="hfA-9a-M2w"/>
+                            <constraint firstItem="tX3-sZ-mRV" firstAttribute="trailing" secondItem="nyY-ex-fbZ" secondAttribute="trailing" constant="35" id="jSQ-pd-4L5"/>
+                            <constraint firstItem="tX3-sZ-mRV" firstAttribute="trailing" secondItem="rYP-2G-gAH" secondAttribute="trailing" constant="35" id="kq1-ML-V78"/>
+                            <constraint firstItem="3ga-xN-hAu" firstAttribute="leading" secondItem="tX3-sZ-mRV" secondAttribute="leading" constant="25" id="ot4-1V-6g6"/>
                             <constraint firstItem="VrX-m1-Ecr" firstAttribute="leading" secondItem="tX3-sZ-mRV" secondAttribute="leading" constant="15" id="om2-vP-3Wj"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="VrX-m1-Ecr" id="xJ6-6K-7q6"/>
                         <outlet property="backPicLabel" destination="YsV-yr-M49" id="GpQ-xS-HSZ"/>
                         <outlet property="backPicView" destination="44h-0Z-vEf" id="qsn-Z8-u9R"/>
+                        <outlet property="checkmarkTitleLabel" destination="XCb-AS-tiA" id="yPf-k9-I7Y"/>
                         <outlet property="checkMarkButton" destination="gqE-dU-7sh" id="8iL-Pl-cW3"/>
                         <outlet property="dlBackNumberLabel" destination="prL-GB-H24" id="GUO-Bg-ENz"/>
                         <outlet property="dlFrontNumberLabel" destination="ctS-hT-2h4" id="fyY-wK-DbC"/>
@@ -839,10 +850,14 @@
                         <outlet property="frontPicView" destination="F8b-hB-fzK" id="bYS-ms-lOf"/>
                         <outlet property="idBackNumberLabel" destination="bJS-rG-Xtv" id="2GP-6k-paj"/>
                         <outlet property="idFrontNumberLabel" destination="Fy1-Vs-gKa" id="9aO-YB-Ndx"/>
+                        <outlet property="nextButton" destination="3ga-xN-hAu" id="QPl-6R-7ry"/>
                         <outlet property="passportFrontLabel" destination="EfQ-4K-aAf" id="sBC-ij-zPy"/>
                         <outlet property="passportFrontView" destination="AZ5-2g-lUF" id="LN3-Fq-A34"/>
                         <outlet property="passportNumberLabel" destination="nrT-QT-zcF" id="1rB-zF-Qsb"/>
                         <outlet property="selfieNumberLabel" destination="yDf-X5-XG1" id="jlL-Wz-swE"/>
+                        <outlet property="stepsStackView" destination="m4h-10-j2l" id="XBf-LP-DGn"/>
+                        <outlet property="subtitleLabel" destination="nyY-ex-fbZ" id="zcH-eL-G4F"/>
+                        <outlet property="titleLabel" destination="rYP-2G-gAH" id="QOl-2M-fvo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HxI-eu-yHR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -927,7 +942,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="EtG-m8-qMn" id="Ck0-48-eR6"/>
                         <outlet property="guideImage" destination="fB5-Bw-py2" id="xvu-YD-eHV"/>
+                        <outlet property="readyButton" destination="nAL-4z-ye5" id="Jwx-d9-THg"/>
+                        <outlet property="subtitleLabel" destination="t8E-7k-JVj" id="5uw-tA-JTu"/>
+                        <outlet property="titleLabel" destination="nzx-eE-TcN" id="A72-P5-5Tx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Tv-w0-gDk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -995,7 +1014,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For the best scan Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeA-IL-N3b">
                                 <rect key="frame" x="50" y="451.33333333333331" width="195" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" red="1" green="0.58520018640000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find an area with good lighting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icA-CH-oZG">
@@ -1036,7 +1055,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="ESY-Rb-S2O" id="3oE-Lp-xgi"/>
                         <outlet property="guideImage" destination="4fy-o2-L0z" id="lK8-Xo-QgO"/>
+                        <outlet property="readyButton" destination="sKp-Cj-cGK" id="s1b-43-2OT"/>
+                        <outlet property="subtitleLabel" destination="XU0-o0-lqq" id="4ZV-gf-Ww0"/>
+                        <outlet property="tipsTitleLabel" destination="YeA-IL-N3b" id="w4B-nQ-v4n"/>
+                        <outlet property="titleLabel" destination="V0u-UH-Tv4" id="XkP-sI-EA5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rba-Mf-cSv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1090,6 +1114,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Jqj-qS-0rP"/>
                     <connections>
+                        <outlet property="loadingLabel" destination="oKj-p1-m7t" id="VdY-3T-Rk8"/>
                         <outlet property="lottieAnimationView" destination="965-mD-TtT" id="kiU-yK-bIP"/>
                     </connections>
                 </viewController>
@@ -1307,6 +1332,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraHeaderTitleLabel" destination="CON-jV-1rD" id="tZf-Ee-zM6"/>
+                        <outlet property="cameraHeaderSubtitleLabel" destination="f9V-BM-4ik" id="z5G-cc-JmE"/>
                         <outlet property="captureButton" destination="XhL-BK-mwp" id="nOq-kG-yuD"/>
                         <outlet property="captureView" destination="b3i-yv-nN9" id="Meo-wF-KC9"/>
                         <outlet property="errorDescription" destination="jcx-FP-Euh" id="Dt1-Ti-wHb"/>
@@ -1481,6 +1508,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraHeaderTitleLabel" destination="cvi-mt-HzT" id="n1B-hh-U2N"/>
+                        <outlet property="cameraHeaderSubtitleLabel" destination="jr3-HI-ruS" id="3vE-hW-v8g"/>
                         <outlet property="captureButton" destination="Rgc-Po-SvB" id="yuy-dx-8E7"/>
                         <outlet property="captureView" destination="K0e-dx-Hj9" id="TNj-8n-SBz"/>
                         <outlet property="overLayView" destination="ZHE-jZ-auy" id="77e-Nc-GQP"/>

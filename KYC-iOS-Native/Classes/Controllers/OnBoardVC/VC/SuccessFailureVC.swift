@@ -27,6 +27,7 @@ class SuccessFailureVC: UIViewController {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
+        applyTheme()
         if let decision {
             self.loadAnimation()
             if decision == "ACCEPTED" {
@@ -38,12 +39,21 @@ class SuccessFailureVC: UIViewController {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                FacekiredirectBack!()
+                self.finishFlow()
             }
         }
     }
     
     //MARK: -Methods
+    private func applyTheme() {
+        view.backgroundColor = .white
+        statusTitleLabel.textColor = FacekiThemeColor.heading
+        statusTitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        statusSubtitleLabel.textColor = FacekiThemeColor.textSecondary
+        statusSubtitleLabel.font = UIFont.systemFont(ofSize: FacekiTypography.headingSubtitle, weight: .regular)
+        addPoweredByFooter()
+    }
+
     private func loadAnimation(){
         let animationView = LottieAnimationView(name: self.decision == "ACCEPTED" ? "lottieSuccess.json" : "lottieFail.json", bundle: frameworkImageBundle)
         animationView.frame = lottieAnimationView.bounds
@@ -51,6 +61,15 @@ class SuccessFailureVC: UIViewController {
         animationView.loopMode = .loop
         animationView.animationSpeed = 0.9
         animationView.play()
+    }
+
+    private func finishFlow() {
+        if let redirect = FacekiredirectBack {
+            redirect()
+            return
+        }
+
+        navigationController?.popToRootViewController(animated: true)
     }
     
 }

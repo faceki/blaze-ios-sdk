@@ -24,6 +24,10 @@ class DocumentSelectionVC: UIViewController {
     @IBOutlet weak var idCardCircle : UIImageView!
     @IBOutlet weak var passportCircle : UIImageView!
     @IBOutlet weak var drivingLicenseCircle : UIImageView!
+    @IBOutlet weak var titleLabel : UILabel!
+    @IBOutlet weak var subtitleLabel : UILabel!
+    @IBOutlet weak var nextButton : UIButton!
+    @IBOutlet weak var backButton : UIButton!
     
     var idCardSelected = false
     var ispassportSelected = false
@@ -64,6 +68,9 @@ class DocumentSelectionVC: UIViewController {
             idCardView.isHidden = false
             drivingLicenseView.isHidden = false
         }
+
+        applyDesignStyle()
+        addPoweredByFooter(anchoredAbove: nextButton)
         
     }
     
@@ -112,12 +119,44 @@ class DocumentSelectionVC: UIViewController {
     }
     
     //MARK: -Methods
+
+    private func applyDesignStyle() {
+        applyStandardScreenBackground()
+        styleHeading(
+            titleLabel: titleLabel,
+            subtitleLabel: subtitleLabel,
+            title: "Select Document Type",
+            subtitle: "Select a document type to continue the verification process."
+        )
+        stylePrimaryActionButton(nextButton, title: "NEXT")
+        styleBackButton(backButton)
+        addTopCancelButton(target: self, action: #selector(didTapCancel))
+
+        [idCardView, passportView, drivingLicenseView].forEach { card in
+            styleSelectionCard(card ?? UIView())
+            card?.layer.borderWidth = 0
+            card?.layer.borderColor = UIColor.clear.cgColor
+
+            for subview in card?.subviews ?? [] {
+                if let label = subview as? UILabel {
+                    label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+                    label.textColor = FacekiThemeColor.textSecondary
+                }
+                if let imageView = subview as? UIImageView,
+                   imageView != idCardCircle,
+                   imageView != passportCircle,
+                   imageView != drivingLicenseCircle {
+                    imageView.tintColor = FacekiThemeColor.textPrimary
+                }
+            }
+        }
+    }
     
     private func toggleSelectionView(selectedView : UIView,selectedImageView : UIImageView, unselectedViews : [UIView], unselectedImageViews : [UIImageView]) {
         selectedView.layer.borderWidth = 0.7
-        selectedView.layer.borderColor = #colorLiteral(red: 1, green: 0.5852001864, blue: 0, alpha: 1)
+        selectedView.layer.borderColor = FacekiThemeColor.primaryButtonBackground.cgColor
         selectedImageView.image = UIImage(systemName: "circle.circle.fill")
-        selectedImageView.tintColor = #colorLiteral(red: 1, green: 0.5852001864, blue: 0, alpha: 1)
+        selectedImageView.tintColor = FacekiThemeColor.primaryButtonBackground
         
         unselectedViews.forEach { unselectedView in
             unselectedView.layer.borderWidth = 0
@@ -128,6 +167,10 @@ class DocumentSelectionVC: UIViewController {
             unselectedImageView.image = UIImage(systemName: "circle.circle")
             unselectedImageView.tintColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
         }
+    }
+
+    @objc private func didTapCancel() {
+        cancelSDKFlow()
     }
     
 }

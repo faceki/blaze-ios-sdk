@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  ScanDocument
-//
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -15,6 +9,9 @@ class ViewController: UIViewController {
     
     //MARK: -Outlets
     @IBOutlet weak var lottieAnimationView : UIView!
+    @IBOutlet weak var titleLabel : UILabel!
+    @IBOutlet weak var subtitleLabel : UILabel!
+    @IBOutlet weak var nextButton : UIButton!
     
     //MARK: -Properties
     var allowSingle : Bool?
@@ -26,6 +23,18 @@ class ViewController: UIViewController {
         if #available(iOS 13.0, *) {
                    overrideUserInterfaceStyle = .light
                }
+
+        applyStandardScreenBackground()
+        styleHeading(
+            titleLabel: titleLabel,
+            subtitleLabel: subtitleLabel,
+            title: "Lets Verify Your Identity",
+            subtitle: "We’ll ask for your ID and a selfie. It’s quick and secure."
+        )
+        stylePrimaryActionButton(nextButton, title: "NEXT")
+        addTopCancelButton(target: self, action: #selector(didTapCancel))
+        addPoweredByFooter(anchoredAbove: nextButton)
+
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.loadAnimation()
@@ -38,8 +47,13 @@ class ViewController: UIViewController {
     
     //MARK: -Actions
     @IBAction private func didTapNext(_ sender : UIButton) {
+        guard requireInternetConnection() else { return }
         self.startActivityIndicator()
         self.getDocumentRulesApiCall()
+    }
+
+    @objc private func didTapCancel() {
+        cancelSDKFlow()
     }
     
     //MARK: -Methods
@@ -56,7 +70,7 @@ class ViewController: UIViewController {
     private func getDocumentRulesApiCall(){
         Task {
             do{
-                var result = try await viewModel.workflowRulesApiCall()
+                let result = try await viewModel.workflowRulesApiCall()
 //                result.data?.allowSingle = true
 //                result.data?.allowedKycDocuments = [DocumentType.idCard.rawValue,DocumentType.passport.rawValue,DocumentType.drivingLicense.rawValue]
                 self.stopActivityIndicator()
@@ -72,9 +86,16 @@ class ViewController: UIViewController {
                     }
                 }
                 
+                Faceki_workflowId = result.result?.workflowId ?? ""
+                
             } catch (let error) {
                 print(error)
                 self.stopActivityIndicator()
+                if let serviceError = error as? ServiceError,
+                   case .noInternetConnection = serviceError {
+                    Utility.showAlertWithOk(title: "No Internet Connection", message: "Please check your internet connection and try again.")
+                    return
+                }
                 Utility.showAlertWithOk(title: "Error", message: "An error Occurred, try again later.")
             }
         }
